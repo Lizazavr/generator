@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Generate</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+</head>
+
+<body>
+<center><h2>Генератор тестовых данных</h2></center>
+    <form id="form_generates" action="#" method="post">
+        <div class="cent">
+        <label class="label">Выбрать генератор:</label>
+        <select id="select_generate" size="1">
+            <option></option>
+            {% for i in scripts:%}
+            <option value={{ i }}>{{ i }}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <br>
+        <br>
+        <input class="button" type="submit" value="Сгенерировать">
+    </form>
+
+    <button id="create_new_generate" class="button" onclick="show(this);">Создать генератор</button>
+    <form action="#" method="#" id="form">
+        <hr>
+        <input class="element" id="name_gen" type="text" placeholder="Новый генератор"> <br>
+        <label class="element2">Название шаблона</label>
+        <label class="element2">Тип шаблона</label>
+        <br>
+        <input class="element2" type="text" id="name_pattern_0" placeholder="Name">
+        <select class="element2" id="pattern_type_0" name="select" size="1" onChange="check(this);">
+            <option></option>
+            <option value="1">Случайное слово</option>
+            <option value="2">Случайный текст</option>
+            <option value="3">Число</option>
+            <option value="4">Имя</option>
+            <option value="5">Дата</option>
+            <option value="6">Почта</option>
+            <!--<option value="7">Сформировать своё</option>-->
+        </select>
+
+        <fieldset id="word_0">
+            <label>Длина:</label>
+            <input type="text" name="nameReq" id="text_word_0">
+
+            <label>Регистры:</label>
+            <select name="select2" size="1" id="select_word_0">
+                <option value="Up">Только большие буквы</option>
+                <option value="Low">Только маленькие буквы</option>
+                <option value="Eny">Любые буквы</option>
+            </select>
+        </fieldset>
+
+        <fieldset id="text_0">
+            <label>Длина слов:</label>
+            <input type="text" name="nameReq" id="text_text_0">
+
+            <label>Количество слов:</label>
+            <input type="text" name="nameReq" id="count_text_0">
+
+            <label>Регистры:</label>
+            <select name="select2" size="1" id="select_text_0">
+                <option value="Up">Только большие буквы</option>
+                <option value="Low">Только маленькие буквы</option>
+                <option value="Eny">Любые буквы</option>
+            </select>
+        </fieldset>
+
+        <fieldset id="number_0">
+            <label>Длина числа:</label>
+            <input type="text" name="nameReq" id="text_number_0">
+
+            <label>Регистры:</label>
+            <select name="select2" size="1" id="select_number_0">
+                <option value="Pos">Положительное</option>
+                <option value="Neg">Отрицательное</option>
+                <option value="Eny">Любое</option>
+            </select>
+        </fieldset>
+
+        <fieldset id="name_0">
+            <label>Длина имени:</label>
+            <input type="text" name="nameReq" id="text_name_0">
+        </fieldset>
+
+        <fieldset id="email_0">
+            <label>Длина почты:</label>
+            <input type="text" name="nameReq" id="text_email_0">
+        </fieldset>
+
+        <fieldset id="my_0">
+                <select name="select2" id="pattern_00" size="1">
+                    <option value="Число">Число</option>
+                    <option value="Буква большая">Буква большая</option>
+                    <option value="Буква маленькая">Буква маленькая</option>
+                    <option value="-">-</option>
+                    <option value="+">+</option>
+                    <option value="_">_</option>
+                    <option value="z">/</option>
+                </select>
+                <div id="emdop20"></div>
+                <button onclick="changeColor2(event);">+</button>
+        </fieldset>
+
+        <div id="emdop"></div><br>
+        <button class="button2" onclick="changeColor(event);">+</button>
+<br>
+        <button type="submit" class="button">Создать</button>
+    </form>
+
+
+<div id=modal class="hystmodal">
+<div id="alert" style={{message}}>
+    <center>
+        <form id="mess" action="#" method="post">
+    <h3>Успех</h3>
+    <p>Тестовые данные успешно созданы</p>
+            <input id="clickMe" type="button" value="Отправить" onclick="doFunction();" />
+        </form>
+        </center>
+    <br>
+</div>
+    </div>
+
+<script src="{{ url_for('static',filename='script.js') }}"></script>
+</body>
+
+</html>

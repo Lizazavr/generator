@@ -1,0 +1,7 @@
+{
+    "name": "generate_random_name('Null')",
+    "last name": "generate_random_name('Null')",
+    "second name": "generate_random_name('Null')",
+    "bithday": "generate_date()",
+    "email": "generate_email(12)"
+  }
