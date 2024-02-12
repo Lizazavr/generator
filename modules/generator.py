@@ -10,5 +10,6 @@ def generator(name):
 
     while(flag):
         test_data = scripts.open_script(name)
-        x = p_mqtt.run(test_data)
+        print(test_data)
+        #x = p_mqtt.run(test_data)
         time.sleep(1)
