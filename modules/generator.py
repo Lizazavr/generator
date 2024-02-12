@@ -1,6 +1,6 @@
 import time
-import scripts
-import p_mqtt
+from modules import scripts
+from modules import p_mqtt
 
 flag = False
 

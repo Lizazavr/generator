@@ -1,6 +1,7 @@
 import string
 import random
 import faker
+from math import *
 
 # Шаблон слова или текста только из букв
 def generate_random_word(length, symbol, count, type):
@@ -61,5 +62,6 @@ def generate_number(count):
 
 # шаблон математического выражения
 def math_formuls(str):
+    print(str)
     return eval(str)
 

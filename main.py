@@ -23,7 +23,8 @@ def index():
             dict_obj = ast.literal_eval(data['data'])
             scripts.new_generate(dict_obj)
         if type_gen == "upload":
-            answer_mqtt = p_mqtt.run(test_data)
+            print("mqtt")
+            #answer_mqtt = p_mqtt.run(test_data)
             #return jsonify({"success": answer_mqtt})
     return render_template('main.html', scripts=scripts.find_scripts(), test_data=test_data)
 

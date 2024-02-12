@@ -55,7 +55,9 @@ def new_generate(data):
                 if type_pattern == "5":
                     data_json[str(name)] = "generate_date()"
                 if type_pattern == "6":
-                    data_json[str(name)] = "generate_email(" + data_pattern["length"] + "')"
+                    data_json[str(name)] = "generate_email(" + data_pattern["length"] + ")"
+                if type_pattern == "7":
+                    data_json[str(name)] = "math_formuls(\"" + data_pattern["formul"] + "\")"
         json.dump(data_json, write_file)
 
 

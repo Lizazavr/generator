@@ -79,19 +79,9 @@ function getFormValue(event) {
             three["length"] = text_email;
         }
         else if (pattern_type == 7) {
-            var dict_three = new Map();
-            four = {};
-            var pattern = document.getElementById('pattern_' + y + '0').parentNode;
-            var str = pattern.outerHTML;
-            var patter = /<select/g;
-            var count = (str.match(patter) || []).length;
-            for (i = 0; i < count; i++) {
-                var x = document.getElementById('pattern_' + y + i).value;
-                dict_three.set(i, x)
-                four[i] = x;
-            }
-            dict_two.set("variable", dict_three)
-            three["variable"] = four;
+            var text_math = document.getElementById('text_math_' + y).value;
+            dict_two.set("formul", text_math)
+            three["formul"] = text_math;
         }
         dict_one.set("patern", dict_two)
 
@@ -156,13 +146,14 @@ function changeColor(event) {
             <label>Длина имени:</label>\
             <input type=\"text\" name=\"nameReq\" id=\"text_name_" + numx + "\"\>\
         </fieldset>\
-        <fieldset id=\"email_" + numx + "\"><label>Длина почты:</label><input type=\"text\" name=\"nameReq\" id=\"text_email_" + numx + "\"></fieldset>"
+        <fieldset id=\"email_" + numx + "\"><label>Длина почты:</label><input type=\"text\" name=\"nameReq\" id=\"text_email_" + numx + "\"></fieldset><fieldset id=\"math_" + numx + "\"><label>Длина почты:</label><input type=\"text\" name=\"nameReq\" id=\"text_math_" + numx + "\"></fieldset>"
 
     document.getElementById('word_' + numx).style.display = 'none';
     document.getElementById('name_' + numx).style.display = 'none';
     document.getElementById('text_' + numx).style.display = 'none';
     document.getElementById('number_' + numx).style.display = 'none';
     document.getElementById('email_' + numx).style.display = 'none';
+    document.getElementById('math_' + numx).style.display = 'none';
     numy = 1;
 }
 
@@ -179,42 +170,49 @@ function check(event) {
             document.getElementById('number_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'none';
         } else if (strUser == 2) {
             document.getElementById('word_' + i).style.display = 'none';
             document.getElementById('text_' + i).style.display = 'block';
             document.getElementById('number_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'none';
         } else if (strUser == 3) {
             document.getElementById('word_' + i).style.display = 'none';
             document.getElementById('number_' + i).style.display = 'block';
             document.getElementById('text_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'none';
         } else if (strUser == 4) {
             document.getElementById('word_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'block';
             document.getElementById('text_' + i).style.display = 'none';
             document.getElementById('number_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'none';
         } else if (strUser == 5) {
             document.getElementById('word_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'none';
             document.getElementById('text_' + i).style.display = 'none';
             document.getElementById('number_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'none';
         } else if (strUser == 6) {
             document.getElementById('word_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'block';
             document.getElementById('text_' + i).style.display = 'none';
             document.getElementById('number_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'none';
         } else {
             document.getElementById('word_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'none';
             document.getElementById('text_' + i).style.display = 'none';
             document.getElementById('number_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'block';
         }
     }
 }
