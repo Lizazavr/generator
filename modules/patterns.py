@@ -58,3 +58,8 @@ def generate_number(count):
         number = number + str(random.randrange(0, 9))
 
     return int(number)
+
+# шаблон математического выражения
+def math_formuls(str):
+    return eval(str)
+
