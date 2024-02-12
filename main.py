@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, jsonify
 from modules import p_mqtt
 from modules import scripts
+from modules import generator
 import ast
 
 app = Flask(__name__, template_folder='templates')
@@ -13,9 +14,9 @@ def index():
     if request.method == 'POST':
         type_gen = request.form.get('type')
         if type_gen == 'name':
+            generator.flag = True
             data = request.form.get('data')
-            test_data = scripts.open_script(data.replace('"', '') + ".json")
-            return jsonify(test_data)
+            generator.generator(data.replace('"', '') + ".json")
         elif type_gen == 'list':
             test_data = ""
             data = request.form.to_dict()
