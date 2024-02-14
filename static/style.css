@@ -1,4 +1,4 @@
-#word_0, #text_0, #number_0, #email_0, #name_0, #my_0, #form{
+#word_0, #text_0, #number_0, #email_0, #name_0, #my_0, #form, #math_0{
     display: none;
 }
 
@@ -67,4 +67,22 @@
     left: 50%;
     transform: translate(-50%,-50%);
 
+}
+
+#button_start_stop{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%
+}
+
+#valid{
+    display: none;
+    color: red
+}
+
+#gen{
+    display: none;
+    color: lightgreen;
+    position:absolute;
+    bottom:10px;
+    right:10px;
 }

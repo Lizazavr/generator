@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, jsonify
 from modules import p_mqtt
 from modules import scripts
+from modules import generator
 import ast
 
 app = Flask(__name__, template_folder='templates')
@@ -13,19 +14,20 @@ def index():
     if request.method == 'POST':
         type_gen = request.form.get('type')
         if type_gen == 'name':
+            generator.flag = True
             data = request.form.get('data')
-            test_data = scripts.open_script(data.replace('"', '') + ".json")
-            return jsonify(test_data)
+            generator.generator(data.replace('"', '') + ".json")
         elif type_gen == 'list':
             test_data = ""
             data = request.form.to_dict()
             dict_obj = ast.literal_eval(data['data'])
             scripts.new_generate(dict_obj)
-        if type_gen == "upload":
-            answer_mqtt = p_mqtt.run(test_data)
-            #return jsonify({"success": answer_mqtt})
+        elif type_gen == 'stop':
+            generator.flag = False
     return render_template('main.html', scripts=scripts.find_scripts(), test_data=test_data)
 
 if __name__ == '__main__':
     scripts.find_scripts()
     app.run(debug=True)
+
+# generator = Blueprint('generator', __name__, template_folder='templates', static_folder='static')

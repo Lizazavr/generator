@@ -11,7 +11,7 @@
     <form id="form_generates" action="#" method="post">
         <div class="cent">
         <label class="label">Выбрать генератор:</label>
-        <select id="select_generate" size="1">
+        <select id="select_generate" size="1" required>
             <option></option>
             {% for i in scripts:%}
             <option value={{ i }}>{{ i }}</option>
@@ -20,17 +20,19 @@
         </div>
         <br>
         <br>
-        <input class="button" type="submit" value="Сгенерировать">
+         <input class="button" id="start" type="submit" value="Запустить">
+
     </form>
 
-    <button id="create_new_generate" class="button" onclick="show(this);">Создать генератор</button>
+    <button id="create_new_generate" class="button" onclick="show(this);">Создать сценарий</button>
     <form action="#" method="#" id="form">
         <hr>
-        <input class="element" id="name_gen" type="text" placeholder="Новый генератор"> <br>
+        <input class="element" id="name_gen" type="text" placeholder="Новый сценарий" required>
+        <label id="valid">Название сценария уже используется</label><br>
         <label class="element2">Название шаблона</label>
         <label class="element2">Тип шаблона</label>
         <br>
-        <input class="element2" type="text" id="name_pattern_0" placeholder="Name">
+        <input class="element2" type="text" id="name_pattern_0" placeholder="Название" required>
         <select class="element2" id="pattern_type_0" name="select" size="1" onChange="check(this);">
             <option></option>
             <option value="1">Случайное слово</option>
@@ -39,12 +41,12 @@
             <option value="4">Имя</option>
             <option value="5">Дата</option>
             <option value="6">Почта</option>
-            <!--<option value="7">Сформировать своё</option>-->
+            <option value="7">Мат. формула</option>
         </select>
 
         <fieldset id="word_0">
             <label>Длина:</label>
-            <input type="text" name="nameReq" id="text_word_0">
+            <input type="text" name="nameReq" id="text_word_0" pattern="^[0-9]+$">
 
             <label>Регистры:</label>
             <select name="select2" size="1" id="select_word_0">
@@ -56,10 +58,10 @@
 
         <fieldset id="text_0">
             <label>Длина слов:</label>
-            <input type="text" name="nameReq" id="text_text_0">
+            <input type="text" name="nameReq" id="text_text_0" pattern="^[0-9]+$">
 
             <label>Количество слов:</label>
-            <input type="text" name="nameReq" id="count_text_0">
+            <input type="text" name="nameReq" id="count_text_0" pattern="^[0-9]+$">
 
             <label>Регистры:</label>
             <select name="select2" size="1" id="select_text_0">
@@ -71,7 +73,7 @@
 
         <fieldset id="number_0">
             <label>Длина числа:</label>
-            <input type="text" name="nameReq" id="text_number_0">
+            <input type="text" name="nameReq" id="text_number_0" pattern="^[0-9]+$">
 
             <label>Регистры:</label>
             <select name="select2" size="1" id="select_number_0">
@@ -83,27 +85,18 @@
 
         <fieldset id="name_0">
             <label>Длина имени:</label>
-            <input type="text" name="nameReq" id="text_name_0">
+            <input type="text" name="nameReq" id="text_name_0" pattern="^[0-9]+$">
         </fieldset>
-
+        <fieldset id="math_0">
+                <label>Мат. формула:</label>
+                <input type="text" name="nameReq" id="text_math_0">
+        </fieldset>
         <fieldset id="email_0">
             <label>Длина почты:</label>
-            <input type="text" name="nameReq" id="text_email_0">
+            <input type="text" name="nameReq" id="text_email_0" pattern="^[0-9]+$">
         </fieldset>
 
-        <fieldset id="my_0">
-                <select name="select2" id="pattern_00" size="1">
-                    <option value="Число">Число</option>
-                    <option value="Буква большая">Буква большая</option>
-                    <option value="Буква маленькая">Буква маленькая</option>
-                    <option value="-">-</option>
-                    <option value="+">+</option>
-                    <option value="_">_</option>
-                    <option value="z">/</option>
-                </select>
-                <div id="emdop20"></div>
-                <button onclick="changeColor2(event);">+</button>
-        </fieldset>
+
 
         <div id="emdop"></div><br>
         <button class="button2" onclick="changeColor(event);">+</button>
@@ -112,7 +105,7 @@
     </form>
 
 
-<div id=modal class="hystmodal">
+<!--<div id=modal class="hystmodal">
 <div id="alert" style={{message}}>
     <center>
         <form id="mess" action="#" method="post">
@@ -123,7 +116,8 @@
         </center>
     <br>
 </div>
-    </div>
+    </div>-->
+<label id="gen">Запущен</label>
 
 <script src="{{ url_for('static',filename='script.js') }}"></script>
 </body>

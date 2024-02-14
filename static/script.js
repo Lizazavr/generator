@@ -3,6 +3,7 @@ form.addEventListener('submit', getFormValue);
 form_generates.addEventListener('submit', getFormValue_one);
 
 var numx = 0;
+var flag = 0;
 
 // функция отображения блока создания нового генератора
 function show(event){
@@ -14,13 +15,35 @@ function doFunction(event) {
     document.getElementById('modal').style.display = 'none';
 }
 
+function check_name(name_gen) {
+    var ddl = document.getElementById('select_generate');
+
+    for (i = 0; i < ddl.options.length; i++) {
+        if (name_gen == ddl.options[i].value){
+
+            return false
+        }
+    }
+    return true
+}
+
 // функция получения выбранного генератора
 function getFormValue_one(event) {
-    event.preventDefault();
-    var generate = document.getElementById('select_generate').value;
-    if (generate){
-    document.getElementById('modal').style.display = 'block';
-    data_go(generate, 'name')
+    if (flag == false){
+        flag = true
+        document.getElementById('start').value = 'Остановить';
+        document.getElementById('gen').style.display = 'block';
+        event.preventDefault();
+        var generate = document.getElementById('select_generate').value;
+        //if (generate){
+            //document.getElementById('modal').style.display = 'block';
+        data_go(generate, 'name')
+        //}
+    } else {
+        flag = false
+        document.getElementById('start').value = 'Запустить';
+        document.getElementById('gen').style.display = 'none';
+        data_go(1, 'stop')
     }
 }
 
@@ -28,6 +51,8 @@ function getFormValue_one(event) {
 function getFormValue(event) {
     event.preventDefault();
     var name_gen = document.getElementById('name_gen').value;
+    if (check_name(name_gen)){
+    document.getElementById('valid').style.display = 'none';
     var dict_json = new Map();
     var o = {}; // object
     o["name_gen"] = name_gen;
@@ -79,19 +104,9 @@ function getFormValue(event) {
             three["length"] = text_email;
         }
         else if (pattern_type == 7) {
-            var dict_three = new Map();
-            four = {};
-            var pattern = document.getElementById('pattern_' + y + '0').parentNode;
-            var str = pattern.outerHTML;
-            var patter = /<select/g;
-            var count = (str.match(patter) || []).length;
-            for (i = 0; i < count; i++) {
-                var x = document.getElementById('pattern_' + y + i).value;
-                dict_three.set(i, x)
-                four[i] = x;
-            }
-            dict_two.set("variable", dict_three)
-            three["variable"] = four;
+            var text_math = document.getElementById('text_math_' + y).value;
+            dict_two.set("formul", text_math)
+            three["formul"] = text_math;
         }
         dict_one.set("patern", dict_two)
 
@@ -102,6 +117,9 @@ function getFormValue(event) {
         dict_json.set(y, dict_one)
     }
     data_go(o, 'list')
+    } else {
+        document.getElementById('valid').style.display = 'block';
+    }
 }
 
 // функция добавления нового шалона
@@ -110,7 +128,7 @@ function changeColor(event) {
     event.preventDefault();
     var p;
     p = document.getElementById('emdop');
-    p.innerHTML += "<input class=\"element2\" type=\"text\" id=\"name_pattern_" + numx + "\" placeholder=\"Name\">\
+    p.innerHTML += "<input class=\"element2\" type=\"text\" id=\"name_pattern_" + numx + "\" placeholder=\"Название\" required>\
             <select class=\"element2\" id=\"pattern_type_" + numx + "\" name=\"select\" size=\"1\" onChange=\"check(this);\">\
             <option></option>\
             <option value=\"1\">Случайное слово</option>\
@@ -122,7 +140,7 @@ function changeColor(event) {
             </select><br>\
             <fieldset id=\"word_" + numx + "\">\
             <label>Длина:</label>\
-            <input type=\"text\" name=\"nameReq\" id=\"text_word_" + numx + "\">\
+            <input type=\"text\" name=\"nameReq\" id=\"text_word_" + numx + "\" pattern=\"^[0-9]+$\">\
             <label>Регистры:</label>\
             <select name=\"select2\" size=\"1\" id=\"select_word_" + numx + "\">\
                 <option value=\"Up\">Только большие буквы</option>\
@@ -132,9 +150,9 @@ function changeColor(event) {
         </fieldset>\
         <fieldset id=\"text_" + numx + "\">\
             <label>Длина слов:</label>\
-            <input type=\"text\" name=\"nameReq\" id=\"text_text_" + numx + "\">\
+            <input type=\"text\" name=\"nameReq\" id=\"text_text_" + numx + "\" pattern=\"^[0-9]+$\">\
             <label>Количество слов:</label>\
-            <input type=\"text\" name=\"nameReq\" id=\"count_text_" + numx + "\">\
+            <input type=\"text\" name=\"nameReq\" id=\"count_text_" + numx + "\" pattern=\"^[0-9]+$\">\
             <label>Регистры:</label>\
             <select name=\"select2\" size=\"1\" id=\"select_text_" + numx + "\">\
                 <option value=\"Up\">Только большие буквы</option>\
@@ -144,7 +162,7 @@ function changeColor(event) {
         </fieldset>\
         <fieldset id=\"number_" + numx + "\">\
             <label>Длина числа:</label>\
-            <input type=\"text\" name=\"nameReq\" id=\"text_number_" + numx + "\">\
+            <input type=\"text\" name=\"nameReq\" id=\"text_number_" + numx + "\" pattern=\"^[0-9]+$\">\
             <label>Регистры:</label>\
             <select name=\"select2\" size=\"1\" id=\"select_number_" + numx + "\">\
                 <option value=\"Pos\">Положительное</option>\
@@ -154,15 +172,16 @@ function changeColor(event) {
         </fieldset>\
         <fieldset id=\"name_" + numx + "\">\
             <label>Длина имени:</label>\
-            <input type=\"text\" name=\"nameReq\" id=\"text_name_" + numx + "\"\>\
+            <input type=\"text\" name=\"nameReq\" id=\"text_name_" + numx + "\" pattern=\"^[0-9]+$\">\
         </fieldset>\
-        <fieldset id=\"email_" + numx + "\"><label>Длина почты:</label><input type=\"text\" name=\"nameReq\" id=\"text_email_" + numx + "\"></fieldset>"
+        <fieldset id=\"email_" + numx + "\"><label>Длина почты:</label><input type=\"text\" name=\"nameReq\" id=\"text_email_" + numx + "\"></fieldset><fieldset id=\"math_" + numx + "\"><label>Длина почты:</label><input type=\"text\" name=\"nameReq\" id=\"text_math_" + numx + "\"></fieldset>"
 
     document.getElementById('word_' + numx).style.display = 'none';
     document.getElementById('name_' + numx).style.display = 'none';
     document.getElementById('text_' + numx).style.display = 'none';
     document.getElementById('number_' + numx).style.display = 'none';
     document.getElementById('email_' + numx).style.display = 'none';
+    document.getElementById('math_' + numx).style.display = 'none';
     numy = 1;
 }
 
@@ -179,42 +198,49 @@ function check(event) {
             document.getElementById('number_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'none';
         } else if (strUser == 2) {
             document.getElementById('word_' + i).style.display = 'none';
             document.getElementById('text_' + i).style.display = 'block';
             document.getElementById('number_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'none';
         } else if (strUser == 3) {
             document.getElementById('word_' + i).style.display = 'none';
             document.getElementById('number_' + i).style.display = 'block';
             document.getElementById('text_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'none';
         } else if (strUser == 4) {
             document.getElementById('word_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'block';
             document.getElementById('text_' + i).style.display = 'none';
             document.getElementById('number_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'none';
         } else if (strUser == 5) {
             document.getElementById('word_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'none';
             document.getElementById('text_' + i).style.display = 'none';
             document.getElementById('number_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'none';
         } else if (strUser == 6) {
             document.getElementById('word_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'block';
             document.getElementById('text_' + i).style.display = 'none';
             document.getElementById('number_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'none';
         } else {
             document.getElementById('word_' + i).style.display = 'none';
             document.getElementById('name_' + i).style.display = 'none';
             document.getElementById('text_' + i).style.display = 'none';
             document.getElementById('number_' + i).style.display = 'none';
             document.getElementById('email_' + i).style.display = 'none';
+            document.getElementById('math_' + i).style.display = 'block';
         }
     }
 }
