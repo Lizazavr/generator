@@ -68,3 +68,21 @@
     transform: translate(-50%,-50%);
 
 }
+
+#button_start_stop{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%
+}
+
+#valid{
+    display: none;
+    color: red
+}
+
+#gen{
+    display: none;
+    color: lightgreen;
+    position:absolute;
+    bottom:10px;
+    right:10px;
+}
