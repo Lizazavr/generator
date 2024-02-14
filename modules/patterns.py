@@ -73,10 +73,16 @@ def generate_number(count):
     return int(number)
 
 # шаблон математического выражения
-def math_formuls(str):
-    print(str)
+def math_formuls(str_formul):
+    x = random.randrange(1, 1000)
+    y = random.randrange(1, 1000)
+    z = random.randrange(1, 1000)
+    str_formul = str_formul.replace("x", str(x))
+    str_formul = str_formul.replace("y", str(y))
+    str_formul = str_formul.replace("z", str(z))
+    print(str_formul)
     try:
-        return eval(str)
+        return eval(str_formul)
     except SyntaxError:
         return "Null"
 

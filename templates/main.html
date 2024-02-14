@@ -90,6 +90,7 @@
         <fieldset id="math_0">
                 <label>Мат. формула:</label>
                 <input type="text" name="nameReq" id="text_math_0">
+                <label>Используйте x, y и z для обозначения случайных переменных.</label>
         </fieldset>
         <fieldset id="email_0">
             <label>Длина почты:</label>
@@ -104,19 +105,6 @@
         <button type="submit" class="button">Создать</button>
     </form>
 
-
-<!--<div id=modal class="hystmodal">
-<div id="alert" style={{message}}>
-    <center>
-        <form id="mess" action="#" method="post">
-    <h3>Успех</h3>
-    <p>Тестовые данные успешно созданы</p>
-            <input id="clickMe" type="button" value="Отправить" onclick="doFunction();" />
-        </form>
-        </center>
-    <br>
-</div>
-    </div>-->
 <label id="gen">Запущен</label>
 
 <script src="{{ url_for('static',filename='script.js') }}"></script>
