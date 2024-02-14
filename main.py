@@ -22,12 +22,12 @@ def index():
             data = request.form.to_dict()
             dict_obj = ast.literal_eval(data['data'])
             scripts.new_generate(dict_obj)
-        if type_gen == "upload":
-            print("mqtt")
-            #answer_mqtt = p_mqtt.run(test_data)
-            #return jsonify({"success": answer_mqtt})
+        elif type_gen == 'stop':
+            generator.flag = False
     return render_template('main.html', scripts=scripts.find_scripts(), test_data=test_data)
 
 if __name__ == '__main__':
     scripts.find_scripts()
     app.run(debug=True)
+
+# generator = Blueprint('generator', __name__, template_folder='templates', static_folder='static')

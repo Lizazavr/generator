@@ -12,4 +12,4 @@ def generator(name):
         test_data = scripts.open_script(name)
         print(test_data)
         #x = p_mqtt.run(test_data)
-        time.sleep(1)
+        time.sleep(0.5)
