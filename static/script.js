@@ -137,6 +137,7 @@ function changeColor(event) {
             <option value=\"4\">Имя</option>\
             <option value=\"5\">Дата</option>\
             <option value=\"6\">Почта</option>\
+            <option value=\"7\">Мат. формула</option>\
             </select><br>\
             <fieldset id=\"word_" + numx + "\">\
             <label>Длина:</label>\
@@ -174,7 +175,7 @@ function changeColor(event) {
             <label>Длина имени:</label>\
             <input type=\"text\" name=\"nameReq\" id=\"text_name_" + numx + "\" pattern=\"^[0-9]+$\">\
         </fieldset>\
-        <fieldset id=\"email_" + numx + "\"><label>Длина почты:</label><input type=\"text\" name=\"nameReq\" id=\"text_email_" + numx + "\"></fieldset><fieldset id=\"math_" + numx + "\"><label>Длина почты:</label><input type=\"text\" name=\"nameReq\" id=\"text_math_" + numx + "\"></fieldset>"
+        <fieldset id=\"email_" + numx + "\"><label>Длина почты:</label><input type=\"text\" name=\"nameReq\" id=\"text_email_" + numx + "\"></fieldset><fieldset id=\"math_" + numx + "\"><label>Длина почты:</label><input type=\"text\" name=\"nameReq\" id=\"text_math_" + numx + "\"><label>Используйте x, y и z для обозначения случайных переменных.</label></fieldset>"
 
     document.getElementById('word_' + numx).style.display = 'none';
     document.getElementById('name_' + numx).style.display = 'none';
