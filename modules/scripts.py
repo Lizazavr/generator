@@ -3,6 +3,7 @@ import os
 from config import Settings
 from modules import patterns
 from modules import generator
+import datetime
 
 path = Settings().path
 
@@ -82,5 +83,5 @@ def new_generate(data):
 
 
 def save_test_data(test_data):
-    with open("test_data/test_data" + ".json", "w", encoding='utf-8') as write_file:
-        write_file.write(test_data)
+    with open("test_data/test_data" + ".txt", "a", encoding='utf-8') as write_file:
+        write_file.write(str(datetime.datetime.now()) + test_data + "\n")
